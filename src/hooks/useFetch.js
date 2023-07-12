@@ -9,7 +9,7 @@ const useFetch = (url) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data } = axios.get(url);
+        const { data } = await axios.get(url);
         setData(data);
       } catch (err) {
         setError(err);
@@ -18,4 +18,16 @@ const useFetch = (url) => {
     };
     fetchData();
   }, [url]);
+  const reFetch = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(url);
+      setData(data);
+    } catch (err) {
+      setError(err);
+    }
+    setLoading(false);
+  };
+  return { data, loading, error, reFetch };
 };
+export default useFetch;
